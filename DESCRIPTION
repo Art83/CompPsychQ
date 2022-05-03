@@ -1,0 +1,15 @@
+Package: CompPsychQ
+Type: Package
+Title: Processing web-based forms part of psychiatry.app
+Version: 1.0
+Date: 2022-05-03
+Author: Artur Shvetcov
+Maintainer: Artur Shvetcov <a.shvetcov@unsw.edu.au>
+Description: Companion R package for the psychiatry.app. Works with web-based forms
+License: GPL (>= 2)
+Imports: Rcpp (>= 1.0.6)
+LinkingTo: Rcpp
+Depends: 
+    R (>= 2.10)
+RoxygenNote: 7.1.2
+Encoding: UTF-8
