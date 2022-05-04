@@ -12,9 +12,7 @@ get_demographics <- function(dataset, completers=T, convert=F, checks=T){
     stop("Empty dataset")
   }
   dataset$PIN <- gsub("'", "", dataset$PIN)
-  essential_cols <- c("pin", "item", "response", "location")
-  nonessential_cols <- c("complete", "date", "calendar_time", "timestamp", "timezone", "commit", "version")
-  
+  essential_cols <- c("pin","complete", "item", "response", "location")
   colnames(dataset) <- tolower(colnames(dataset))
   if(!all(essential_cols %in% colnames(dataset))){
     stop(essential_cols[!essential_cols %in% colnames(dataset)]," column(s) not found in the dataset")

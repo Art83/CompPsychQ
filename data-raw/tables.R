@@ -24,8 +24,13 @@ marital_table <- list("Divorced" = 1,
                       "Separated" = 2,
                       "Never married" = 3,
                       "Married" = 4)
-usethis::use_data(gender_table ,
+
+thr_OCI <- 21
+
+usethis::use_data(gender_table,
                   education_table,
                   income_table,
                   employment_table,
-                  marital_table, overwrite = TRUE)
+                  marital_table,
+                  thr_OCI, overwrite = TRUE)
+
