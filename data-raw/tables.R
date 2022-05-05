@@ -27,10 +27,19 @@ marital_table <- list("Divorced" = 1,
 
 thr_OCI <- 21
 
+contingency_oci <- list("sym_wash" = c(5,11,17),
+                        "sym_obsess" = c(6, 12, 18),
+                        "sym_hoard" = c(1, 7, 13),
+                        "sym_order" = c(3, 9, 15),
+                        "sym_check" = c(2, 8, 14),
+                        "sym_ment" = c(4,10,16))
+
+
 usethis::use_data(gender_table,
                   education_table,
                   income_table,
                   employment_table,
                   marital_table,
-                  thr_OCI, overwrite = TRUE)
+                  thr_OCI,
+                  contingency_oci, overwrite = TRUE)
 
