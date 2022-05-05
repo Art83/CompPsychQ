@@ -34,7 +34,11 @@ get_oci <- function(dataset, subscales=F, completers=T){
   } else {
     num_participants <- unique(dataset$pin)
   }
-  df_sum <- aggregate(response ~ PIN, data=d, sum)
+  
+  if(is.na(dataset$response)){
+    warning("You have NAs in response columns!")
+  }
+  df_sum <- aggregate(response ~ PIN, data=dataset, sum)
   df_sum$oci_cat <- ifelse(df_sum$response >= CompPsychQ::thr_OCI, 1, 0)
   
   
