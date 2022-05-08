@@ -35,6 +35,8 @@ contingency_oci <- list("sym_wash" = c(5,11,17),
                         "sym_ment" = c(4,10,16))
 
 
+
+
 usethis::use_data(gender_table,
                   education_table,
                   income_table,
