@@ -64,5 +64,5 @@ usethis::use_data(gender_table,
                   contingency_oci,
                   contingency_moves,
                   contingency_eat,
-                  overwrite = TRUE)
+                  overwrite = TRUE, internal = T)
 
