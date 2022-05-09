@@ -9,13 +9,13 @@ get_moves(dataset, subscales = F, completers = T)
 \arguments{
 \item{dataset}{original dataset "moves" from the bundle}
 
-\item{subscales}{boolean parameter, if True includes to the returned dataframe OCI subscales}
+\item{subscales}{boolean parameter, if True includes to the returned dataframe moves subscales}
 
 \item{completers}{boolean parameter, if True filters out participants that are not labeled as completers}
 }
 \value{
 either dataframe with 3 columns:
-        PIN, response, oci_cat or dataframe with 9 columns: PIN, response, oci_cat, sym_wash, sym_obsess,sym_hoard,sym_order,sym_check,sym_ment
+        PIN, response, oci_cat or dataframe with 14 columns: PIN, response,moves_cat, sym_mtsimp, sym_mtcomp, sym_mtsub, sym_vtsimp, sym_vtcomp, sym_vtsub, sym_ticsub, sym_obsess, sym_comp, sym_ocsub, sym_assoc
 }
 \description{
 get_moves function

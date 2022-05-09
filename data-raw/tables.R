@@ -27,6 +27,7 @@ marital_table <- list("Divorced" = 1,
 
 thr_oci <- 21
 thr_moves <- 10
+thr_eat <- 20
 
 contingency_oci <- list("sym_wash" = c(5,11,17),
                         "sym_obsess" = c(6, 12, 18),
@@ -47,6 +48,9 @@ contingency_moves <- list("sym_mtsimp" = c(2, 6),
                           "sym_ocsub" = c(3, 7, 9, 14, 4, 8, 11),
                           "sym_assoc" = c(17, 18, 19, 20))
 
+contingency_eat <- list("eat_sym_diet" = c(1,6,7,10,11,12,14,16,17,22,23,24,26),
+                        "eat_sym_bul" = c(3,4,9,18,21,25),
+                        "eat_sym_oral" = c(2,5,8,13,15,19,20))
 
 
 usethis::use_data(gender_table,
@@ -56,7 +60,9 @@ usethis::use_data(gender_table,
                   marital_table,
                   thr_oci,
                   thr_moves,
+                  thr_eat,
                   contingency_oci,
                   contingency_moves,
+                  contingency_eat,
                   overwrite = TRUE)
 
