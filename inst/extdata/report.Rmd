@@ -4,6 +4,7 @@ params:
   stages: x
   dynamictitle: "My report"
   author: "name"
+  path: y
 
 title: "`r params$dynamictitle`"
 date: "`r Sys.Date()`"
@@ -16,10 +17,38 @@ knitr::opts_chunk$set(echo = F)
 ```
 
 
-`r ev = "OCI" %in% params$stages`
-
-```{r, oci_title, eval = ev}
+`r ev = "oci" %in% params$stages`
+```{r oci_title, eval = ev}
 knitr::asis_output("## OCI-R\\n") # Header that is only shown if print_option == TRUE
 print(1:10) # Other stuff that is only executed if print_option == TRUE
+```
+
+```{r oci, echo=F, message=F, warning=F}
+files_list <- list.files(path)
+if(!"OCI-R.csv" %in% files_list){
+  cat("No oci.csv in the folder")
+} else {
+  df <- read.csv(paste0(path, "/OCI-R.csv"), stringsAsFactors = F)
+  res <- get_oci(df)
+  print(res)
+}
+```
+
+
+
+
+`r ev = "moves" %in% params$stages`
+```{r moves_title, eval = ev}
+knitr::asis_output("## MOVES\\n")
+```
+
+```{r moves, echo=F, message=F, warning=F}
+if(!"MOVES.csv" %in% files_list){
+  cat("No MOVES.csv in the folder")
+} else {
+  df <- read.csv(paste0(path, "/MOVES.csv"), stringsAsFactors = F)
+  res <- get_moves(df)
+  print(res)
+}
 ```
 

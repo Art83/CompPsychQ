@@ -1,12 +1,12 @@
-#' get_OCI function
-#' @param dataset original dataset "OCI" from the bundle
+#' get_moves function
+#' @param dataset original dataset "moves" from the bundle
 #' @param completers boolean parameter, if True filters out participants that are not labeled as completers
-#' @param subscales boolean parameter, if True includes to the returned dataframe OCI subscales 
+#' @param subscales boolean parameter, if True includes to the returned dataframe moves subscales 
 #' @return either dataframe with 3 columns:
-#'         PIN, response, oci_cat or dataframe with 9 columns: PIN, response, oci_cat, sym_wash, sym_obsess,sym_hoard,sym_order,sym_check,sym_ment
+#'         PIN, response, oci_cat or dataframe with 14 columns: PIN, response,moves_cat, sym_mtsimp, sym_mtcomp, sym_mtsub, sym_vtsimp, sym_vtcomp, sym_vtsub, sym_ticsub, sym_obsess, sym_comp, sym_ocsub, sym_assoc
 #' @export
 
-get_oci <- function(dataset, subscales=F, completers=T){
+get_moves <- function(dataset, subscales=F, completers=T){
   if(nrow(dataset) == 0 | ncol(dataset) == 0){
     stop("Empty dataset")
   }
@@ -38,32 +38,27 @@ get_oci <- function(dataset, subscales=F, completers=T){
   if(any(is.na(dataset$response))){
     warning("You have NAs in response columns!")
   }
+  dataset$response <- ifelse(as.character(dataset$response) == 'Never', 0, 
+                                                  ifelse(as.character(dataset$response) == 'Sometimes', 1,
+                                                          ifelse(as.character(dataset$response) == 'Often', 2,
+                                                                  ifelse(as.character(dataset$response) == 'Always', 3, 5)) ))  
+  
+  
   df_sum <- aggregate(response ~ pin, data=dataset, sum)
-  df_sum$oci_cat <- ifelse(df_sum$response >= CompPsychQ::thr_oci, 1, 0)
+  df_sum$moves_cat <- ifelse(df_sum$response >= CompPsychQ::thr_moves, 1, 0)
   
   
   if(subscales == F){
     return(df_sum)
   } else {
-    subsc <- data.frame(matrix(ncol = length(names(CompPsychQ::contingency_oci))+1, nrow = length(num_participants)))
-    colnames(subsc) <- c("pin", names(CompPsychQ::contingency_oci))
+    subsc <- data.frame(matrix(ncol = length(names(CompPsychQ::contingency_moves))+1, nrow = length(num_participants)))
+    colnames(subsc) <- c("pin", names(CompPsychQ::contingency_moves))
     subsc[,1] <- as.character(num_participants)
-    for(i in names(CompPsychQ::contingency_oci)){
-     subsc[,i] <- aggregate(response ~ pin, data=dataset[dataset$item %in% CompPsychQ::contingency_oci[[i]],], sum)[,2]
+    for(i in names(CompPsychQ::contingency_moves)){
+      subsc[,i] <- aggregate(response ~ pin, data=dataset[dataset$item %in% CompPsychQ::contingency_moves[[i]],], sum)[,2]
     }
     answer <- merge(df_sum, subsc, by="pin")
     return(answer)
   }
   
 }
-
-
-
-
-
-
-
-
-
-
-
