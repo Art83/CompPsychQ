@@ -46,7 +46,7 @@ get_oci <- function(dataset, subscales=F, completers=T){
     return(df_sum)
   } else {
     subsc <- data.frame(matrix(ncol = length(names(contingency_oci))+1, nrow = length(num_participants)))
-    colnames(subsc) <- c("pin", names(CompPsychQ::contingency_oci))
+    colnames(subsc) <- c("pin", names(contingency_oci))
     subsc[,1] <- as.character(num_participants)
     for(i in names(contingency_oci)){
      subsc[,i] <- aggregate(response ~ pin, data=dataset[dataset$item %in% contingency_oci[[i]],], sum)[,2]
