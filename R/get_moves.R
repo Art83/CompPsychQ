@@ -45,17 +45,17 @@ get_moves <- function(dataset, subscales=F, completers=T){
   
   
   df_sum <- aggregate(response ~ pin, data=dataset, sum)
-  df_sum$moves_cat <- ifelse(df_sum$response >= CompPsychQ::thr_moves, 1, 0)
+  df_sum$moves_cat <- ifelse(df_sum$response >= thr_moves, 1, 0)
   
   
   if(subscales == F){
     return(df_sum)
   } else {
-    subsc <- data.frame(matrix(ncol = length(names(CompPsychQ::contingency_moves))+1, nrow = length(num_participants)))
-    colnames(subsc) <- c("pin", names(CompPsychQ::contingency_moves))
+    subsc <- data.frame(matrix(ncol = length(names(contingency_moves))+1, nrow = length(num_participants)))
+    colnames(subsc) <- c("pin", names(contingency_moves))
     subsc[,1] <- as.character(num_participants)
-    for(i in names(CompPsychQ::contingency_moves)){
-      subsc[,i] <- aggregate(response ~ pin, data=dataset[dataset$item %in% CompPsychQ::contingency_moves[[i]],], sum)[,2]
+    for(i in names(contingency_moves)){
+      subsc[,i] <- aggregate(response ~ pin, data=dataset[dataset$item %in% contingency_moves[[i]],], sum)[,2]
     }
     answer <- merge(df_sum, subsc, by="pin")
     return(answer)

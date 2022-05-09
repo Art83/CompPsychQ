@@ -67,17 +67,17 @@ get_eating <- function(dataset, subscales=F, completers=T){
   
   
   df_sum <- aggregate(response ~ pin, data=eat_total, sum)
-  df_sum$eat_cat <- ifelse(df_sum$response >= CompPsychQ::thr_eat, 1, 0)
+  df_sum$eat_cat <- ifelse(df_sum$response >= thr_eat, 1, 0)
   
   
   if(subscales == F){
     return(df_sum)
   } else {
-    subsc <- data.frame(matrix(ncol = length(names(CompPsychQ::contingency_eat))+1, nrow = length(num_participants)))
-    colnames(subsc) <- c("pin", names(CompPsychQ::contingency_eat))
+    subsc <- data.frame(matrix(ncol = length(names(contingency_eat))+1, nrow = length(num_participants)))
+    colnames(subsc) <- c("pin", names(contingency_eat))
     subsc[,1] <- as.character(num_participants)
-    for(i in names(CompPsychQ::contingency_eat)){
-      subsc[,i] <- aggregate(response ~ pin, data=eat_total[as.numeric(eat_total$item) %in% CompPsychQ::contingency_eat[[i]],], sum)[,2]
+    for(i in names(contingency_eat)){
+      subsc[,i] <- aggregate(response ~ pin, data=eat_total[as.numeric(eat_total$item) %in% contingency_eat[[i]],], sum)[,2]
     }
     answer <- merge(df_sum, subsc, by="pin")
     return(answer)

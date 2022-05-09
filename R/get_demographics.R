@@ -139,11 +139,11 @@ get_demographics <- function(dataset, completers=T, convert=F, checks=T){
   }
   
   if(convert){
-    participants_table$marital_status <- sapply(participants_table$marital_status, function(x) CompPsychQ::marital_table[[x]])
-    participants_table$education <- sapply(participants_table$education, function(x) CompPsychQ::education_table[[x]])
-    participants_table$employment <- sapply(participants_table$employment, function(x) CompPsychQ::employment_table[[x]])
-    participants_table$income <- sapply(participants_table$income, function(x) CompPsychQ::income_table[[x]])
-    participants_table$gender <- sapply(participants_table$gender, function(x) CompPsychQ::gender_table[[x]])
+    participants_table$marital_status <- sapply(participants_table$marital_status, function(x) marital_table[[x]])
+    participants_table$education <- sapply(participants_table$education, function(x) education_table[[x]])
+    participants_table$employment <- sapply(participants_table$employment, function(x) employment_table[[x]])
+    participants_table$income <- sapply(participants_table$income, function(x) income_table[[x]])
+    participants_table$gender <- sapply(participants_table$gender, function(x) gender_table[[x]])
     return(participants_table)
   } else {
     return(participants_table)
