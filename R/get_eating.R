@@ -75,9 +75,11 @@ get_eating <- function(dataset, subscales=F, completers=T){
   } else {
     subsc <- data.frame(matrix(ncol = length(names(contingency_eat))+1, nrow = length(num_participants)))
     colnames(subsc) <- c("pin", names(contingency_eat))
+    subsc$pin <- as.character(subsc$pin)
     subsc[,1] <- as.character(num_participants)
     for(i in names(contingency_eat)){
-      subsc[,i] <- aggregate(response ~ pin, data=eat_total[as.numeric(eat_total$item) %in% contingency_eat[[i]],], sum)[,2]
+      agreg_t <- aggregate(response ~ pin, data=dataset[dataset$item %in% contingency_eat[[i]],], sum)
+      subsc[,i] <- unname(sapply(subsc$pin, function(x) agreg_t[agreg_t$pin == x, "response"]))
     }
     answer <- merge(df_sum, subsc, by="pin")
     return(answer)

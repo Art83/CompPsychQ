@@ -1,4 +1,4 @@
-#' get_OCI function
+#' get_oci function
 #' @param dataset original dataset "OCI" from the bundle
 #' @param completers boolean parameter, if True filters out participants that are not labeled as completers
 #' @param subscales boolean parameter, if True includes to the returned dataframe OCI subscales 
@@ -47,9 +47,11 @@ get_oci <- function(dataset, subscales=F, completers=T){
   } else {
     subsc <- data.frame(matrix(ncol = length(names(contingency_oci))+1, nrow = length(num_participants)))
     colnames(subsc) <- c("pin", names(contingency_oci))
+    subsc$pin <- as.character(subsc$pin)
     subsc[,1] <- as.character(num_participants)
     for(i in names(contingency_oci)){
-     subsc[,i] <- aggregate(response ~ pin, data=dataset[dataset$item %in% contingency_oci[[i]],], sum)[,2]
+     agreg_t <- aggregate(response ~ pin, data=dataset[dataset$item %in% contingency_oci[[i]],], sum)
+     subsc[,i] <- unname(sapply(subsc$pin, function(x) agreg_t[agreg_t$pin == x, "response"]))
     }
     answer <- merge(df_sum, subsc, by="pin")
     return(answer)

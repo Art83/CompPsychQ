@@ -53,9 +53,11 @@ get_moves <- function(dataset, subscales=F, completers=T){
   } else {
     subsc <- data.frame(matrix(ncol = length(names(contingency_moves))+1, nrow = length(num_participants)))
     colnames(subsc) <- c("pin", names(contingency_moves))
+    subsc$pin <- as.character(subsc$pin)
     subsc[,1] <- as.character(num_participants)
     for(i in names(contingency_moves)){
-      subsc[,i] <- aggregate(response ~ pin, data=dataset[dataset$item %in% contingency_moves[[i]],], sum)[,2]
+      agreg_t <- aggregate(response ~ pin, data=dataset[dataset$item %in% contingency_moves[[i]],], sum)
+      subsc[,i] <- unname(sapply(subsc$pin, function(x) agreg_t[agreg_t$pin == x, "response"]))
     }
     answer <- merge(df_sum, subsc, by="pin")
     return(answer)
