@@ -28,6 +28,7 @@ marital_table <- list("Divorced" = 1,
 thr_oci <- 21
 thr_moves <- 10
 thr_eat <- 20
+thr_sds <- 5
 
 contingency_oci <- list("sym_wash" = c(5,11,17),
                         "sym_obsess" = c(6, 12, 18),
