@@ -20,9 +20,6 @@ get_sds <- function(dataset, subscales=F, completers=T){
   if(any(is.na(dataset["item"])) | any(dataset["pin"] == "")){
     stop("Missed data in item column")
   }
-  if(any(is.na(dataset["response"])) | any(dataset["pin"] == "")){
-    stop("Missed data in response column")
-  }
   if(completers){
     num_participants <- unique(dataset[dataset$complete == 'y', "pin"])
     dataset <- dataset[dataset$complete == "y", ]
@@ -37,8 +34,15 @@ get_sds <- function(dataset, subscales=F, completers=T){
     warning("You have NAs in response columns!")
   }
   items_of_inter <- c('SOCIAL*', 'FAMILY*', 'WORK*')
+  if(any(is.na(dataset["response"]))){
+    na_work <- which(is.na(dataset[,"response"]))
+    dataset[na_work, "response"] <- sapply(na_work, function(x) mean(dataset[dataset$pin == dataset$pin[x], "response"],na.rm = T) )
+  }
+  dataset$response <- as.numeric(dataset$response)
+  
   dataset <- dataset[dataset$item %in% items_of_inter, ]
-  df_sum <- aggregate(response ~ pin, data=dataset, sum)
-  df_sum$oci_cat <- ifelse(df_sum$response >= thr_sds, 1, 0)
+  dataset$sds_cat <- ifelse(dataset$response >= 5, 1, 0)
+  df_sum <- aggregate(sds_cat ~ pin, data = dataset, sum)
+  df_sum$sds_cat <- ifelse(df_sum$sds >= 1, 1, 0)
   return(df_sum)
 }
