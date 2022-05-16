@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_OCI.R
 \name{get_oci}
 \alias{get_oci}
-\title{get_OCI function}
+\title{get_oci function}
 \usage{
 get_oci(dataset, subscales = F, completers = T)
 }
@@ -18,5 +18,5 @@ either dataframe with 3 columns:
         PIN, response, oci_cat or dataframe with 9 columns: PIN, response, oci_cat, sym_wash, sym_obsess,sym_hoard,sym_order,sym_check,sym_ment
 }
 \description{
-get_OCI function
+get_oci function
 }

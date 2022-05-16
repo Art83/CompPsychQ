@@ -41,7 +41,7 @@ get_sds <- function(dataset, subscales=F, completers=T){
   dataset$response <- as.numeric(dataset$response)
   
   dataset <- dataset[dataset$item %in% items_of_inter, ]
-  dataset$sds_cat <- ifelse(dataset$response >= 5, 1, 0)
+  dataset$sds_cat <- ifelse(dataset$response >= thr_sds, 1, 0)
   df_sum <- aggregate(sds_cat ~ pin, data = dataset, sum)
   df_sum$sds_cat <- ifelse(df_sum$sds >= 1, 1, 0)
   return(df_sum)
