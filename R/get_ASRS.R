@@ -2,7 +2,7 @@
 #' @param dataset original dataset "ASRS" from the bundle
 #' @param completers boolean parameter, if True filters out participants that are not labeled as completers
 #' @return dataframe with 3 columns:
-#'         PIN, response, asrs_cat
+#'         PIN, asrs_sum, asrs_cat
 #' @export
 get_asrs <- function(dataset, subscales=F, completers=T){
   if(nrow(dataset) == 0 | ncol(dataset) == 0){
@@ -50,5 +50,6 @@ get_asrs <- function(dataset, subscales=F, completers=T){
   
   df_sum <- aggregate(response ~ pin, data=dataset, sum)
   df_sum$asrs_cat <- ifelse(df_sum$response >= thr_asrs, 1, 0)
+  colnames(df_sum) <- c("PIN", "asrs_sum", "asrs_cat")
   return(df_sum)
 }

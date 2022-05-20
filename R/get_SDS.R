@@ -2,7 +2,7 @@
 #' @param dataset original dataset "SDS" from the bundle
 #' @param completers boolean parameter, if True filters out participants that are not labeled as completers
 #' @return dataframe with 3 columns:
-#'         PIN, response, sds_cat
+#'         PIN, sds_sum, sds_cat
 #' @export
 get_sds <- function(dataset, subscales=F, completers=T){
   if(nrow(dataset) == 0 | ncol(dataset) == 0){
@@ -34,15 +34,17 @@ get_sds <- function(dataset, subscales=F, completers=T){
     warning("You have NAs in response columns!")
   }
   items_of_inter <- c('SOCIAL*', 'FAMILY*', 'WORK*')
+  dataset <- dataset[dataset$item %in% items_of_inter, ]
+  dataset$response <- as.numeric(dataset$response)
   if(any(is.na(dataset["response"]))){
     na_work <- which(is.na(dataset[,"response"]))
     dataset[na_work, "response"] <- sapply(na_work, function(x) mean(dataset[dataset$pin == dataset$pin[x], "response"],na.rm = T) )
   }
-  dataset$response <- as.numeric(dataset$response)
-  
-  dataset <- dataset[dataset$item %in% items_of_inter, ]
   dataset$sds_cat <- ifelse(dataset$response >= thr_sds, 1, 0)
+  ds <- aggregate(response ~ pin, dataset, sum)
   df_sum <- aggregate(sds_cat ~ pin, data = dataset, sum)
   df_sum$sds_cat <- ifelse(df_sum$sds >= 1, 1, 0)
+  df_sum <- merge(ds, df_sum, by="pin")
+  colnames(df_sum) <- c("PIN", "asrs_sum", "asrs_cat")
   return(df_sum)
 }

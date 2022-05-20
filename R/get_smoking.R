@@ -2,7 +2,7 @@
 #' @param dataset original dataset "smoking_status" and "FTND" from the bundle
 #' @param completers boolean parameter, if True filters out participants that are not labeled as completers
 #' @return dataframe with 4 columns:
-#'         PIN, response, smoking_status, ftnd_status
+#'         "PIN", "smoking_status", "smoking_cat", "ftnd_sum", "ftnd_cat"
 #' @export
 get_smoking <- function(dataset1,dataset2, subscales=F, completers=T){
   if(nrow(dataset1) == 0 | ncol(dataset1) == 0){
@@ -98,6 +98,6 @@ get_smoking <- function(dataset1,dataset2, subscales=F, completers=T){
   
   df <- merge(df_sum, df_sum2, by="pin")
   df$ftnd_cat <- ifelse(df$ftnd_sum >= thr_ftnd, 1,0)
-  
+  colnames(df) <- c("PIN", "smoking_status", "smoking_cat", "ftnd_sum", "ftnd_cat")
   return(df)
 }

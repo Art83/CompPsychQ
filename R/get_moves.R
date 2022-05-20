@@ -3,7 +3,7 @@
 #' @param completers boolean parameter, if True filters out participants that are not labeled as completers
 #' @param subscales boolean parameter, if True includes to the returned dataframe moves subscales 
 #' @return either dataframe with 3 columns:
-#'         PIN, response, oci_cat or dataframe with 14 columns: PIN, response,moves_cat, sym_mtsimp, sym_mtcomp, sym_mtsub, sym_vtsimp, sym_vtcomp, sym_vtsub, sym_ticsub, sym_obsess, sym_comp, sym_ocsub, sym_assoc
+#'         PIN, response, moves_cat or dataframe with 14 columns: PIN, response,moves_cat, sym_mtsimp, sym_mtcomp, sym_mtsub, sym_vtsimp, sym_vtcomp, sym_vtsub, sym_ticsub, sym_obsess, sym_comp, sym_ocsub, sym_assoc
 #' @export
 
 get_moves <- function(dataset, subscales=F, completers=T){
@@ -49,6 +49,7 @@ get_moves <- function(dataset, subscales=F, completers=T){
   
   
   if(subscales == F){
+    colnames(df_sum)[1:2] <- c("PIN", "moves_sum")
     return(df_sum)
   } else {
     subsc <- data.frame(matrix(ncol = length(names(contingency_moves))+1, nrow = length(num_participants)))
@@ -60,6 +61,7 @@ get_moves <- function(dataset, subscales=F, completers=T){
       subsc[,i] <- unname(sapply(subsc$pin, function(x) agreg_t[agreg_t$pin == x, "response"]))
     }
     answer <- merge(df_sum, subsc, by="pin")
+    colnames(answer)[1:2] <- c("PIN", "moves_sum")
     return(answer)
   }
   

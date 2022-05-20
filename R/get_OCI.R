@@ -43,6 +43,7 @@ get_oci <- function(dataset, subscales=F, completers=T){
   
   
   if(subscales == F){
+    colnames(df_sum)[1:2] <- c("PIN", "oci_sum")
     return(df_sum)
   } else {
     subsc <- data.frame(matrix(ncol = length(names(contingency_oci))+1, nrow = length(num_participants)))
@@ -54,6 +55,7 @@ get_oci <- function(dataset, subscales=F, completers=T){
      subsc[,i] <- unname(sapply(subsc$pin, function(x) agreg_t[agreg_t$pin == x, "response"]))
     }
     answer <- merge(df_sum, subsc, by="pin")
+    colnames(answer)[1:2] <- c("PIN", "oci_sum")
     return(answer)
   }
   
