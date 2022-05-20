@@ -45,6 +45,7 @@ get_sds <- function(dataset, subscales=F, completers=T){
   df_sum <- aggregate(sds_cat ~ pin, data = dataset, sum)
   df_sum$sds_cat <- ifelse(df_sum$sds >= 1, 1, 0)
   df_sum <- merge(ds, df_sum, by="pin")
-  colnames(df_sum) <- c("PIN", "asrs_sum", "asrs_cat")
+  colnames(df_sum) <- c("PIN", "sds_sum", "sds_cat")
   return(df_sum)
 }
+dataset <- read.csv("D:/OCD/data_proc/beta_10/SDS.csv", stringsAsFactors = F)

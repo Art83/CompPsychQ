@@ -13,7 +13,7 @@ get_asrs(dataset, subscales = F, completers = T)
 }
 \value{
 dataframe with 3 columns:
-        PIN, response, asrs_cat
+        PIN, asrs_sum, asrs_cat
 }
 \description{
 get_asrs function

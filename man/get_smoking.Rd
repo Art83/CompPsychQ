@@ -13,7 +13,7 @@ get_smoking(dataset1, dataset2, subscales = F, completers = T)
 }
 \value{
 dataframe with 4 columns:
-        PIN, response, smoking_status, ftnd_status
+        "PIN", "smoking_status", "smoking_cat", "ftnd_sum", "ftnd_cat"
 }
 \description{
 get_smoking function

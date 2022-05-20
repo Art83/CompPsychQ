@@ -15,7 +15,7 @@ get_moves(dataset, subscales = F, completers = T)
 }
 \value{
 either dataframe with 3 columns:
-        PIN, response, oci_cat or dataframe with 14 columns: PIN, response,moves_cat, sym_mtsimp, sym_mtcomp, sym_mtsub, sym_vtsimp, sym_vtcomp, sym_vtsub, sym_ticsub, sym_obsess, sym_comp, sym_ocsub, sym_assoc
+        PIN, response, moves_cat or dataframe with 14 columns: PIN, response,moves_cat, sym_mtsimp, sym_mtcomp, sym_mtsub, sym_vtsimp, sym_vtcomp, sym_vtsub, sym_ticsub, sym_obsess, sym_comp, sym_ocsub, sym_assoc
 }
 \description{
 get_moves function

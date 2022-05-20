@@ -13,7 +13,7 @@ get_sds(dataset, subscales = F, completers = T)
 }
 \value{
 dataframe with 3 columns:
-        PIN, response, sds_cat
+        PIN, sds_sum, sds_cat
 }
 \description{
 get_sds function
