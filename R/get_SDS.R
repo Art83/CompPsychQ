@@ -48,4 +48,3 @@ get_sds <- function(dataset, subscales=F, completers=T){
   colnames(df_sum) <- c("PIN", "sds_sum", "sds_cat")
   return(df_sum)
 }
-dataset <- read.csv("D:/OCD/data_proc/beta_10/SDS.csv", stringsAsFactors = F)
