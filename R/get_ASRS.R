@@ -24,7 +24,7 @@ get_asrs <- function(dataset, subscales=F, completers=T){
     stop("You have NAs in response columns!")
   }
   
-  if(!all(c("Never", "Rarely", "Sometimes","Often","Very often") %in% dataset$response)){
+  if(!all(dataset$response %in% c("Never", "Rarely", "Sometimes","Often","Very often"))){
     stop("Range constraints are broken!")
   }
   if(completers){
