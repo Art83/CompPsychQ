@@ -31,6 +31,7 @@ thr_eat <- 20
 thr_sds <- 5
 thr_asrs <- 14
 thr_ftnd <- 4
+thr_asrm <- 6
 
 contingency_oci <- list("sym_wash" = c(5,11,17),
                         "sym_obsess" = c(6, 12, 18),
@@ -73,6 +74,9 @@ ftnd_scale <- list(`1` = list("Within 5 minutes" = 3,
                    `6` = list("Yes" = 1,
                               "No" = 0))
 
+prime_scale <- data.frame(response = c("Definitely disagree", "Somewhat disagree","Slightly disagree", "Not sure", "Slightly agree", "Somewhat agree", "Definitely agree"),
+                          score = c(0:6))
+
 
 usethis::use_data(gender_table,
                   education_table,
@@ -84,9 +88,11 @@ usethis::use_data(gender_table,
                   thr_eat,
                   thr_asrs,
                   thr_sds,
+                  thr_asrm,
                   contingency_oci,
                   contingency_moves,
                   contingency_eat,
                   ftnd_scale,
+                  prime_scale,
                   overwrite = TRUE, internal = T)
 
