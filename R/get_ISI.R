@@ -4,7 +4,7 @@
 #' @return dataframe with 4 columns:
 #'         PIN, isi_sum, isi_cat, isi_sev
 #' @export
-get_asrm <- function(dataset, completers=T){
+get_isi <- function(dataset, completers=T){
   if(nrow(dataset) == 0 | ncol(dataset) == 0){
     stop("Empty dataset")
   }
