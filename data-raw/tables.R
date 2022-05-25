@@ -32,6 +32,7 @@ thr_sds <- 5
 thr_asrs <- 14
 thr_ftnd <- 4
 thr_asrm <- 6
+thr_isi <- 15
 
 contingency_oci <- list("sym_wash" = c(5,11,17),
                         "sym_obsess" = c(6, 12, 18),
@@ -89,6 +90,7 @@ usethis::use_data(gender_table,
                   thr_asrs,
                   thr_sds,
                   thr_asrm,
+                  thr_isi,
                   contingency_oci,
                   contingency_moves,
                   contingency_eat,
