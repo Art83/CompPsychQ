@@ -98,6 +98,7 @@ usethis::use_data(gender_table,
                   thr_asrm,
                   thr_isi,
                   thr_ptsd,
+                  thr_gad
                   contingency_oci,
                   contingency_moves,
                   contingency_eat,
