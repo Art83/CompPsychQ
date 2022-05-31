@@ -33,6 +33,8 @@ thr_asrs <- 14
 thr_ftnd <- 4
 thr_asrm <- 6
 thr_isi <- 15
+thr_ptsd <- 3
+thr_gad <- 10
 
 contingency_oci <- list("sym_wash" = c(5,11,17),
                         "sym_obsess" = c(6, 12, 18),
@@ -56,6 +58,10 @@ contingency_moves <- list("sym_mtsimp" = c(2, 6),
 contingency_eat <- list("eat_sym_diet" = c(1,6,7,10,11,12,14,16,17,22,23,24,26),
                         "eat_sym_bul" = c(3,4,9,18,21,25),
                         "eat_sym_oral" = c(2,5,8,13,15,19,20))
+
+contingency_gad <- list("gad_sym_nsom" = c(1, 2, 3, 7),
+                        "gad_symp_som" = c(4, 5, 6 ))
+
 
 
 ftnd_scale <- list(`1` = list("Within 5 minutes" = 3,
@@ -91,9 +97,11 @@ usethis::use_data(gender_table,
                   thr_sds,
                   thr_asrm,
                   thr_isi,
+                  thr_ptsd,
                   contingency_oci,
                   contingency_moves,
                   contingency_eat,
+                  contingency_gad,
                   ftnd_scale,
                   prime_scale,
                   overwrite = TRUE, internal = T)
