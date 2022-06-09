@@ -35,6 +35,7 @@ thr_asrm <- 6
 thr_isi <- 15
 thr_ptsd <- 3
 thr_gad <- 10
+thr_phq <- 10
 
 contingency_oci <- list("sym_wash" = c(5,11,17),
                         "sym_obsess" = c(6, 12, 18),
@@ -98,7 +99,8 @@ usethis::use_data(gender_table,
                   thr_asrm,
                   thr_isi,
                   thr_ptsd,
-                  thr_gad
+                  thr_gad,
+                  thr_phq,
                   contingency_oci,
                   contingency_moves,
                   contingency_eat,
