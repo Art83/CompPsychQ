@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_prime.R
 \name{get_prime}
 \alias{get_prime}
-\title{get_asrs function}
+\title{get_prime function}
 \usage{
 get_prime(dataset, subscales = F, completers = T)
 }
@@ -16,5 +16,5 @@ dataframe with 4 columns:
         PIN, cutoff_6, cutoff_5, prime_cat
 }
 \description{
-get_asrs function
+get_prime function
 }

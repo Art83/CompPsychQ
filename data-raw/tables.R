@@ -36,6 +36,8 @@ thr_isi <- 15
 thr_ptsd <- 3
 thr_gad <- 10
 thr_phq <- 10
+thr_pgsi <- 8
+thr_yiat <- 31
 
 
 
@@ -75,6 +77,15 @@ contingency_dass <- list("dass_sym_depr" = c(3, 5, 10, 13, 16, 17, 21),
                         "dass_sym_anx" = c(2, 4, 7, 9, 15, 19, 20),
                         "dass_sym_stress" = c(1, 6, 8, 11, 12, 14, 18))
 
+contingency_pid <- list("pid_sym_na" = c(8,9,10,11,15),
+                        "pid_sym_det" = c(4,13,14,16,18),
+                        "pid_sym_antag" = c(17,19,20,22,25),
+                        "pid_sym_disin" = c(1,2,3,5,6),
+                        "pid_sym_psych" = c(7,12,21,23,24))
+
+
+contingency_yiat <- list("sym_loctm" = c(1, 2, 3, 6, 8, 9),
+                         "sym_csp" = c(4, 5, 7, 10, 11, 12))
 
 
 
@@ -98,6 +109,11 @@ ftnd_scale <- list(`1` = list("Within 5 minutes" = 3,
 prime_scale <- data.frame(response = c("Definitely disagree", "Somewhat disagree","Slightly disagree", "Not sure", "Slightly agree", "Somewhat agree", "Definitely agree"),
                           score = c(0:6))
 
+pgsi_scale <- data.frame(response = c("Never", "Sometimes","Most of the time", "Almost always"),
+                          score = c(0:3))
+
+yiat_scale <- data.frame(response = c("Never", "Rarely", "Sometimes", "Often", "Very often"),
+                         score = c(1:5))
 
 usethis::use_data(gender_table,
                   education_table,
@@ -114,13 +130,19 @@ usethis::use_data(gender_table,
                   thr_ptsd,
                   thr_gad,
                   thr_phq,
+                  thr_pgsi,
+                  thr_yiat,
                   contingency_oci,
                   contingency_moves,
                   contingency_eat,
                   contingency_gad,
                   contingency_phq,
                   contingency_dass,
+                  contingency_pid,
+                  contingency_yiat,
                   ftnd_scale,
                   prime_scale,
+                  pgsi_scale,
+                  yiat_scale,
                   overwrite = TRUE, internal = T)
 

@@ -1,0 +1,75 @@
+#' get_yiat function
+#' @param dataset original dataset "YIAT" from the bundle
+#' @param completers boolean parameter, if True filters out participants that are not labeled as completers
+#' @param subscales boolean parameter, if True includes to the returned dataframe moves subscales 
+#' @return either dataframe with 4 columns:
+#'         PIN, phq_sum, phq_cat, phq_sev or dataframe with 6 columns: "PIN", "yiat_sum", "yiat_cat", "yiat_sev", "yiat_sym_loctm", "yiat_sym_csp"
+#' @export
+
+get_yiat <- function(dataset, subscales=F, completers=T){
+  if(nrow(dataset) == 0 | ncol(dataset) == 0){
+    stop("Empty dataset")
+  }
+  dataset$PIN <- gsub("'", "", dataset$PIN)
+  essential_cols <- c("pin", "complete",  "item", "response")
+  colnames(dataset) <- tolower(colnames(dataset))
+  if(!all(essential_cols %in% colnames(dataset))){
+    stop(essential_cols[!essential_cols %in% colnames(dataset)]," column(s) not found in the dataset")
+  }
+  if(any(is.na(dataset["pin"])) | any(dataset["pin"] == "")){
+    stop("Missed data in pin column")
+  }
+  if(any(is.na(dataset["item"])) | any(dataset["pin"] == "")){
+    stop("Missed data in item column")
+  }
+  if(completers){
+    num_participants <- unique(dataset[dataset$complete == 'y', "pin"])
+    dataset <- dataset[dataset$complete == "y", ]
+    if(nrow(dataset) == 0){
+      stop("There are no completers in your dataset")
+    }
+  } else {
+    num_participants <- unique(dataset$pin)
+  }
+  
+  if(any(is.na(dataset$response))){
+    warning("You have NAs in response columns!")
+  }
+  if(!all(dataset$response %in% c("Never", "Rarely", "Sometimes", "Often", "Very often"))){
+    stop("Range constraints are broken!")
+  }
+  
+  if(!all(as.character(dataset$item) %in% as.character((1:12)) )){
+    stop("Item constraints are broken!")
+  }
+  
+  
+  dataset$item <- as.numeric(dataset$item)
+  dataset$response <- as.character(dataset$response)
+  
+  dataset$response <- yiat_scale$score[match(dataset$response, yiat_scale$response)]
+  dataset$response <- as.numeric(dataset$response)
+  df_sum <- aggregate(response ~ pin, data=dataset, sum, na.action = NULL)
+  df_sum$yiat_cat <- ifelse(df_sum$response >= thr_yiat, 1, 0)
+  df_sum$yiat_sev = ifelse(df_sum$response >= 38, 2, 
+                          ifelse( (df_sum$response <= 37 & df_sum$response >= 31), 1,0) ) 
+  
+  
+  if(subscales == F){
+    colnames(df_sum) <- c("PIN", "yiat_sum", "yiat_cat", "yiat_sev")
+    return(df_sum)
+  } else {
+    subsc <- data.frame(matrix(ncol = length(names(contingency_yiat))+1, nrow = length(num_participants)))
+    colnames(subsc) <- c("pin", names(contingency_yiat))
+    subsc$pin <- as.character(subsc$pin)
+    subsc[,1] <- as.character(num_participants)
+    for(i in names(contingency_yiat)){
+      agreg_t <- aggregate(response ~ pin, data=dataset[dataset$item %in% contingency_yiat[[i]],], sum, na.action=NULL)
+      subsc[,i] <- unname(sapply(subsc$pin, function(x) agreg_t[agreg_t$pin == x, "response"]))
+    }
+    answer <- merge(df_sum, subsc, by="pin")
+    colnames(answer) <- c("PIN", "yiat_sum", "yiat_cat", "yiat_sev", "yiat_sym_loctm", "yiat_sym_csp")
+    return(answer)
+  }
+  
+}
