@@ -17,16 +17,32 @@ get_asrm <- function(dataset, completers=T){
   if(any(is.na(dataset["pin"])) | any(dataset["pin"] == "")){
     stop("Missed data in pin column")
   }
-  if(any(is.na(dataset["item"])) | any(dataset["pin"] == "")){
+  if(any(is.na(dataset["item"])) | any(dataset["item"] == "")){
     stop("Missed data in item column")
   }
   if(any(is.na(dataset$response))){
     stop("You have NAs in response columns!")
   }
   
-  if(!all(dataset$response %in% c(0:4))){
-    stop("Range constraints are broken!")
+  if(is.factor(dataset$response)){
+    warning("Response is factor. Transforming it into numeric format")
+    dataset$response <- as.numeric(as.character(dataset$response))
   }
+  
+  if(is.factor(dataset$item)){
+    warning("Item is factor. Transforming it into numeric format")
+    dataset$item <- as.numeric(as.character(dataset$item))
+  }
+  
+  if(!all(dataset$response %in% c(0:4))){
+    stop("Range constraints of responses are broken!")
+  }
+  
+  if(!all(dataset$item %in% c(1:5))){
+    stop("Range constraints of items are broken!")
+  }
+  
+  
   if(completers){
     num_participants <- unique(dataset[dataset$complete == 'y', "pin"])
     dataset <- dataset[dataset$complete == "y", ]
