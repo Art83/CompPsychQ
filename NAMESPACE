@@ -2,6 +2,7 @@
 
 export(get_asrm)
 export(get_asrs)
+export(get_dass)
 export(get_demographics)
 export(get_eating)
 export(get_gad)
