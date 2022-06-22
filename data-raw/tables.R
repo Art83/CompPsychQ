@@ -125,32 +125,32 @@ ftnd_scale <- list(`1` = list("Within 5 minutes" = 3,
                               "No" = 0))
 
 prime_scale <- data.frame(response = c("Definitely disagree", "Somewhat disagree","Slightly disagree", "Not sure", "Slightly agree", "Somewhat agree", "Definitely agree"),
-                          score = c(0:6))
+                          score = c(0:6),stringsAsFactors = F)
 
 pgsi_scale <- data.frame(response = c("Never", "Sometimes","Most of the time", "Almost always"),
-                          score = c(0:3))
+                          score = c(0:3),stringsAsFactors = F)
 
 yiat_scale <- data.frame(response = c("Never", "Rarely", "Sometimes", "Often", "Very often"),
-                         score = c(1:5))
+                         score = c(1:5), stringsAsFactors = F)
 
 raads_scale <- data.frame(response = c("Never true","True only when I was younger than 16","True only now", "True now and when I was young"),
-                                      score_1 = c(0:3), score_2 = c(3:0))
+                                      score_1 = c(0:3), score_2 = c(3:0),stringsAsFactors = F)
 
 
 audit_scale_1 <- data.frame(response = c("Never", "Monthly or less", "2-4 times a month", "2-3 times a week", "4 or more times a week"),
-                            score = c(0:4))
+                            score = c(0:4), stringsAsFactors = F)
 
 
 audit_scale_2 <- data.frame(response = c("1 or 2", "3 or 4", "5 or 6", "7 to 9", "10 or more"),
-                            score = c(0:4))
+                            score = c(0:4),stringsAsFactors = F)
 
 
 audit_scale_3_8 <- data.frame(response = c("Never", "Less than monthly", "Monthly", "Weekly", "Daily or almost daily"),
-                            score = c(0:4))
+                            score = c(0:4), stringsAsFactors = F)
 
 
 audit_scale_9_10 <- data.frame(response = c("No", "Yes but not in the last year", "Yes, during the last year"),
-                             score = c(0,2,4))
+                             score = c(0,2,4), stringsAsFactors = F)
 
 usethis::use_data(gender_table,
                   education_table,
