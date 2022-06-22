@@ -38,6 +38,9 @@ thr_gad <- 10
 thr_phq <- 10
 thr_pgsi <- 8
 thr_yiat <- 31
+thr_lsas <- 30
+thr_raads <- 14
+thr_audit <- 8
 
 
 
@@ -84,8 +87,23 @@ contingency_pid <- list("pid_sym_na" = c(8,9,10,11,15),
                         "pid_sym_psych" = c(7,12,21,23,24))
 
 
-contingency_yiat <- list("sym_loctm" = c(1, 2, 3, 6, 8, 9),
-                         "sym_csp" = c(4, 5, 7, 10, 11, 12))
+contingency_yiat <- list("yiat_sym_loctm" = c(1, 2, 3, 6, 8, 9),
+                         "yiat_sym_csp" = c(4, 5, 7, 10, 11, 12))
+
+
+
+contingency_lsas <- list("lsas_sym_sif" = paste0("F",c(5, 7, 10, 11, 12, 15, 18, 19, 22, 23, 24)),
+                         "lsas_sym_sia" = paste0("A",c(5, 7, 10, 11, 12, 15, 18, 19, 22, 23, 24)),
+                         "lsas_sym_pf" = paste0("F", c(1, 2, 3, 4, 6, 8, 9,13, 14, 16, 17, 20, 21)),
+                         "lsas_sym_pa" = paste0("A", c(1, 2, 3, 4, 6, 8, 9,13, 14, 16, 17, 20, 21)) )
+
+contingency_raads <- list("raads_sym_md" = c(1,4,9,11,12,13,14),
+                          "raads_sym_sa" = c(3,5,6,8),
+                          "raads_sym_sr" = c(2,7,10))
+
+contingency_audit <- list("audit_sym_ac" = c(1,2,3),
+                          "audit_sym_bd" = c(4,5,6),
+                          "audit_sym_probs" = c(7,8,9,10))
 
 
 
@@ -115,6 +133,25 @@ pgsi_scale <- data.frame(response = c("Never", "Sometimes","Most of the time", "
 yiat_scale <- data.frame(response = c("Never", "Rarely", "Sometimes", "Often", "Very often"),
                          score = c(1:5))
 
+raads_scale <- data.frame(response = c("Never true","True only when I was younger than 16","True only now", "True now and when I was young"),
+                                      score_1 = c(0:3), score_2 = c(3:0))
+
+
+audit_scale_1 <- data.frame(response = c("Never", "Monthly or less", "2-4 times a month", "2-3 times a week", "4 or more times a week"),
+                            score = c(0:4))
+
+
+audit_scale_2 <- data.frame(response = c("1 or 2", "3 or 4", "5 or 6", "7 to 9", "10 or more"),
+                            score = c(0:4))
+
+
+audit_scale_3_8 <- data.frame(response = c("Never", "Less than monthly", "Monthly", "Weekly", "Daily or almost daily"),
+                            score = c(0:4))
+
+
+audit_scale_9_10 <- data.frame(response = c("No", "Yes but not in the last year", "Yes, during the last year"),
+                             score = c(0,2,4))
+
 usethis::use_data(gender_table,
                   education_table,
                   income_table,
@@ -132,6 +169,9 @@ usethis::use_data(gender_table,
                   thr_phq,
                   thr_pgsi,
                   thr_yiat,
+                  thr_lsas,
+                  thr_raads,
+                  thr_audit,
                   contingency_oci,
                   contingency_moves,
                   contingency_eat,
@@ -140,9 +180,17 @@ usethis::use_data(gender_table,
                   contingency_dass,
                   contingency_pid,
                   contingency_yiat,
+                  contingency_lsas,
+                  contingency_raads,
+                  contingency_audit,
                   ftnd_scale,
                   prime_scale,
                   pgsi_scale,
                   yiat_scale,
+                  raads_scale,
+                  audit_scale_1,
+                  audit_scale_2,
+                  audit_scale_3_8,
+                  audit_scale_9_10,
                   overwrite = TRUE, internal = T)
 
