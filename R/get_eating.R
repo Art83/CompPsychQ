@@ -42,7 +42,8 @@ get_eating <- function(dataset, subscales=F, completers=T){
   if(is.factor(dataset$response) | is.factor(dataset$item)){
     stop("One of the columns is factor")
   }
-
+  
+  dataset <- dataset[!is.na(dataset$item), ] # Leaving only 26 questions
   dataset$item <- as.numeric(dataset$item)
   d_1_25 <- dataset[dataset$item %in% c(1:25), ]
   if(all(d_1_25$response %in% c("Always", "Usually", "Often", "Rarely", "Never"))){
@@ -78,7 +79,7 @@ get_eating <- function(dataset, subscales=F, completers=T){
     subsc$pin <- as.character(subsc$pin)
     subsc[,1] <- as.character(num_participants)
     for(i in names(contingency_eat)){
-      agreg_t <- aggregate(response ~ pin, data=dataset[dataset$item %in% contingency_eat[[i]],], sum)
+      agreg_t <- aggregate(response ~ pin, data=eat_total[eat_total$item %in% contingency_eat[[i]],], sum)
       subsc[,i] <- unname(sapply(subsc$pin, function(x) agreg_t[agreg_t$pin == x, "response"]))
     }
     answer <- merge(df_sum, subsc, by="pin")
