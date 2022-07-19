@@ -58,6 +58,6 @@ get_pgsi <- function(dataset, subscales=F, completers=T){
                                      ifelse((df_sum$response >= 1 & df_sum$response <= 2), 1, 0)))
   
   
-  colnames(df_sum) <- c("PIN", "pgsi_sum", "pgsi_sev") 
+  colnames(df_sum) <- c("PIN", "pgsi_sum", "pgsi_cat", "pgsi_sev") 
   return(df_sum)
 }
