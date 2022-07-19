@@ -90,8 +90,8 @@ get_smoking <- function(smoking,ftnd, subscales=F, completers=T){
     ftnd$item <- as.numeric(ftnd$item)
   }                       
   
-  ftnd$ftnd_sum <- sapply(1:nrow(ftnd), function(x) if(is.na(ftnd$response[x])){return(NA)} 
-                           else {return(unlist(ftnd_scale[[as.character(ftnd$item[x])]][[as.character(ftnd$response[x])]]))} )
+  ftnd$ftnd_sum <- unlist(sapply(1:nrow(ftnd), function(x) if(is.na(ftnd$response[x])){return(NA)} 
+                           else {return(unlist(ftnd_scale[[as.character(ftnd$item[x])]][[as.character(ftnd$response[x])]]))} ) )
   
   
   df_sum2 <- aggregate(ftnd_sum ~ pin, ftnd, sum, na.action=NULL)
