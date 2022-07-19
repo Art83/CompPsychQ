@@ -52,7 +52,7 @@ get_pgsi <- function(dataset, subscales=F, completers=T){
   df_sum <- aggregate(response ~ pin, data = dataset, sum, na.action = NULL)
 
   
-  df_sum$pgsi_cat <- ifelse(df_sum$response >= 8, 1, 0)
+  df_sum$pgsi_cat <- ifelse(df_sum$response >= thr_pgsi, 1, 0)
   df_sum$pgsi_sev <- ifelse(df_sum$response >= 8, 3,
                              ifelse((df_sum$response>= 3 & df_sum$response <= 7), 2,
                                      ifelse((df_sum$response >= 1 & df_sum$response <= 2), 1, 0)))
