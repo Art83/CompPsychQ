@@ -56,7 +56,7 @@ get_demographics <- function(dataset, completers=T, convert=F, checks=T){
     message("Check height column")
     message(e)
   })
-  height <- tidyr::pivot_wider(height, names_from = item, values_from = response)
+  height <- reshape(height, idvar = "pin", timevar = "item", direction = "wide")
   colnames(height)[grepl("feet",colnames(height))] <- "feet"
   colnames(height)[grepl("inches",colnames(height))] <- "inch"
   colnames(height)[grepl("cm",colnames(height))] <- "cm"
