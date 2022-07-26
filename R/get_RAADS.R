@@ -3,7 +3,7 @@
 #' @param completers boolean parameter, if True filters out participants that are not labeled as completers
 #' @param subscales boolean parameter, if True includes to the returned dataframe moves subscales 
 #' @return either dataframe with 3 columns:
-#'         PIN, raads_sum, raads_cat or dataframe with 6 columns: "PIN", "lsas_sum", "lsas_cat", "raads_sym_md","raads_sym_sa","raads_sym_sr"
+#'         PIN, raads_sum, raads_cat or dataframe with 6 columns: "PIN", "raads_sum", "raads_cat", "raads_sym_md","raads_sym_sa","raads_sym_sr"
 #' @export
 get_raads <- function(dataset, subscales=F, completers=T){
   if(nrow(dataset) == 0 | ncol(dataset) == 0){
@@ -45,7 +45,7 @@ get_raads <- function(dataset, subscales=F, completers=T){
   
   dataset$item <- as.numeric(dataset$item)
   dataset$response <- ifelse(dataset$item == 6, raads_scale$score_2[match(dataset$response, raads_scale$response)],
-                             lsas_scale$score_1[match(dataset$response, raads_scale$response)])
+                             raads_scale$score_1[match(dataset$response, raads_scale$response)])
   
   dataset$response <- as.numeric(dataset$response)
   
