@@ -3,7 +3,7 @@
 #' @param completers boolean parameter, if True filters out participants that are not labeled as completers
 #' @param subscales boolean parameter, if True includes to the returned dataframe eating subscales 
 #' @return either dataframe with 3 columns:
-#'         PIN, response, oci_cat or dataframe with 6 columns: PIN, response, eat_cat, eat_sym_diet, eat_sym_bul, eat_sym_oral
+#'         PIN, response, oci_cat or dataframe with 6 columns: PIN, eat_sum, eat_cat, eat_sym_diet, eat_sym_bul, eat_sym_oral
 #' @export
 
 get_eating <- function(dataset, subscales=F, completers=T){
@@ -83,6 +83,7 @@ get_eating <- function(dataset, subscales=F, completers=T){
       subsc[,i] <- unname(sapply(subsc$pin, function(x) agreg_t[agreg_t$pin == x, "response"]))
     }
     answer <- merge(df_sum, subsc, by="pin")
+    colnames(answer)[c(1:2)] <- c("PIN", "eat_sum")
     return(answer)
   }
   
