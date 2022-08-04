@@ -46,9 +46,9 @@ get_prime <- function(dataset, subscales=F, completers=T){
   
 
   df_6 <- aggregate(response ~ pin, data = dataset, function(x) sum(x == 6))
-  colnames(df_6)[2] <- "cutoff_6"
+  colnames(df_6)[2] <- "prime_sum_cutoff_6"
   df_5_3 <- aggregate(response ~ pin, data = dataset, function(x) sum(x == 5))
-  colnames(df_5_3)[2] <- "cutoff_5"
+  colnames(df_5_3)[2] <- "prime_sum_cutoff_5"
   
   df_sum <- merge(df_6, df_5_3, by="pin")
   
