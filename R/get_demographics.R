@@ -130,6 +130,8 @@ get_demographics <- function(dataset, completers=T, convert=F, checks=T){
                                    message(e)
                                  })
   
+  colnames(participants_table)[1] <- "PIN"
+  
   # Basic Checks
   if(checks){
     participants_table$age[which(participants_table$age > 80 | participants_table$age < 16)] <- NA
