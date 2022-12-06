@@ -15,7 +15,7 @@ get_eating(dataset, subscales = F, completers = T)
 }
 \value{
 either dataframe with 3 columns:
-        PIN, response, oci_cat or dataframe with 6 columns: PIN, response, eat_cat, eat_sym_diet, eat_sym_bul, eat_sym_oral
+        PIN, response, oci_cat or dataframe with 6 columns: PIN, eat_sum, eat_cat, eat_sym_diet, eat_sym_bul, eat_sym_oral
 }
 \description{
 get_eating function

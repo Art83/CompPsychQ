@@ -49,15 +49,9 @@ get_pid <- function(dataset, subscales=F, completers=T){
   dataset$response <- as.numeric(dataset$response)
   df_sum <- aggregate(response ~ pin, data=dataset, sum, na.action = NULL)
   
-  df_sum$response <- round(df_sum$response/25)
-  
-  df_sum$pid_cat <- ifelse(df_sum$response >= 3, "Severe",
-                           ifelse(df_sum$response == 2, "Moderate",
-                                  ifelse(df_sum$response == 1, "Mild", "Normal"))) 
-  
-  
+
   if(subscales == F){
-    colnames(df_sum) <- c("PIN", "pid_sum", "pid_cat")
+    colnames(df_sum) <- c("PIN", "pid_sum")
     return(df_sum)
   } else {
     subsc <- data.frame(matrix(ncol = length(names(contingency_pid))+1, nrow = length(num_participants)))
@@ -73,7 +67,7 @@ get_pid <- function(dataset, subscales=F, completers=T){
     
     
     
-    colnames(answer) <- c("PIN", "pid_sum","pid_cat", "pid_sym_na", "pid_sym_det", "pid_sym_antag", "pid_sym_disin", "pid_sym_psych")
+    colnames(answer) <- c("PIN", "pid_sum", "pid_sym_na", "pid_sym_det", "pid_sym_antag", "pid_sym_disin", "pid_sym_psych")
     return(answer)
   }
   

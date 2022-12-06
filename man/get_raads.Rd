@@ -15,7 +15,7 @@ get_raads(dataset, subscales = F, completers = T)
 }
 \value{
 either dataframe with 3 columns:
-        PIN, raads_sum, raads_cat or dataframe with 6 columns: "PIN", "lsas_sum", "lsas_cat", "raads_sym_md","raads_sym_sa","raads_sym_sr"
+        PIN, raads_sum, raads_cat or dataframe with 6 columns: "PIN", "raads_sum", "raads_cat", "raads_sym_md","raads_sym_sa","raads_sym_sr"
 }
 \description{
 get_raads function

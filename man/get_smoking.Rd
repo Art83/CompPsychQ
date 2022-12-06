@@ -4,7 +4,7 @@
 \alias{get_smoking}
 \title{get_smoking function}
 \usage{
-get_smoking(dataset1, dataset2, subscales = F, completers = T)
+get_smoking(smoking, ftnd, subscales = F, completers = T)
 }
 \arguments{
 \item{completers}{boolean parameter, if True filters out participants that are not labeled as completers}
