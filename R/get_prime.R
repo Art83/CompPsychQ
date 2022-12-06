@@ -52,7 +52,7 @@ get_prime <- function(dataset, subscales=F, completers=T){
   
   df_sum <- merge(df_6, df_5_3, by="pin")
   
-  df_sum$prime_cat <- ifelse(df_sum$cutoff_6 > 0 | df_sum$cutoff_5 > 0, 1, 0)
+  df_sum$prime_cat <- ifelse(df_sum$prime_sum_cutoff_6 > 0 | df_sum$prime_sum_cutoff_5 > 0, 1, 0)
   colnames(df_sum)[1] <- "PIN" 
   return(df_sum)
 }
