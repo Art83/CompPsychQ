@@ -40,7 +40,7 @@ get_ptsd <- function(dataset, completers=T){
   dataset$response <- ifelse(dataset$response == "YES", 1, 0)
   ds <- aggregate(response ~ pin, dataset, sum, na.action = NULL)
   ds$ptsd_cat <- ifelse(ds$response >= thr_ptsd, 1, 0)
-  ds$ptsd_cat <- ifelse(is.na(df$ptsd_cat), 0, df$ptsd_cat)
+  ds$ptsd_cat <- ifelse(is.na(ds$ptsd_cat), 0, ds$ptsd_cat)
   colnames(ds) <- c("PIN", "ptsd_sum", "ptsd_cat")
   return(ds)
 }
