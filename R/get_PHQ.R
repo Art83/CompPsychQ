@@ -50,8 +50,9 @@ get_phq <- function(dataset, subscales=F, completers=T){
   df_sum <- aggregate(response ~ pin, data=dataset, sum, na.action = NULL)
   df_sum$phq_cat <- ifelse(df_sum$response >= thr_phq, 1, 0)
   df_sum$phq_sev = ifelse(df_sum$response < 4, 0, 
-                          ifelse( (df_sum$response >= 5 & df_sum$response <= 14), 1,
-                                  ifelse( (df_sum$response >= 15 & df_sum$response <= 19), 2, 3)))
+                          ifelse( (df_sum$response >= 5 & df_sum$response <= 9), 1,
+                                  ifelse( (df_sum$response >= 10 & df_sum$response <= 14), 2,
+                                          ifelse((df_sum$response >= 15 & df_sum$response <= 19), 3, 4) ) ) )
   
   
   if(subscales == F){

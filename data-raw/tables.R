@@ -32,12 +32,12 @@ thr_sds <- 5
 thr_asrs <- 14
 thr_ftnd <- 4
 thr_asrm <- 6
-thr_isi <- 15
+thr_isi <- 10
 thr_ptsd <- 3
 thr_gad <- 10
 thr_phq <- 10
 thr_pgsi <- 8
-thr_yiat <- 31
+thr_yiat <- 38
 thr_lsas <- 30
 thr_raads <- 14
 thr_audit <- 8

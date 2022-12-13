@@ -1,8 +1,8 @@
 #' get_isi function
 #' @param dataset original dataset "ASRM" from the bundle
 #' @param completers boolean parameter, if True filters out participants that are not labeled as completers
-#' @return dataframe with 4 columns:
-#'         PIN, isi_sum, isi_cat, isi_sev
+#' @return dataframe with 3 columns:
+#'         PIN, isi_sum, isi_cat
 #' @export
 get_isi <- function(dataset, completers=T){
   if(nrow(dataset) == 0 | ncol(dataset) == 0){
@@ -42,10 +42,7 @@ get_isi <- function(dataset, completers=T){
   
   df_sum <- aggregate(response ~ pin, data=dataset, sum)
   df_sum$isi_cat <- ifelse(df_sum$response >= thr_isi, 1, 0)
-  df_sum$isi_sev <- ifelse(df_sum$response > 22, 3,
-                            ifelse((df_sum$response <= 21 & df_sum$response >= 15), 2,
-                                    ifelse((df_sum$response <= 14 & df_sum$response >= 8), 1, 0)))
-  
-  colnames(df_sum) <- c("PIN", "isi_sum", "isi_cat", "isi_sev")
+
+  colnames(df_sum) <- c("PIN", "isi_sum", "isi_cat")
   return(df_sum)
 }

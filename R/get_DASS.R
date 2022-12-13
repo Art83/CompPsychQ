@@ -69,13 +69,14 @@ get_dass <- function(dataset, subscales=F, completers=T){
                                           ifelse(answer$dass_sym_depr >= 7, 2, 
                                                   ifelse(answer$dass_sym_depr >= 5, 1, 0))))
     
-    answer$anxiety_cat <- ifelse(answer$dass_sym_anx > 10, 4,
+    answer$anxiety_cat <- ifelse(answer$dass_sym_anx >= 10, 4,
                                  ifelse(answer$dass_sym_anx >= 8, 3,
                                          ifelse(answer$dass_sym_anx >= 6, 2, 
                                                  ifelse(answer$dass_sym_anx >= 4, 1, 0)))) 
-    answer$stress_cat <- ifelse(answer$dass_sym_stress > 17, 4,
+    
+    answer$stress_cat <- ifelse(answer$dass_sym_stress >= 17, 4,
                                 ifelse(answer$dass_sym_stress >= 13, 3,
-                                        ifelse(answer$dass_sym_stress>= 10, 2, 
+                                        ifelse(answer$dass_sym_stress >= 10, 2, 
                                                 ifelse(answer$dass_sym_stress >= 8, 1, 0)))) 
     
     
