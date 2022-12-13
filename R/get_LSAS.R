@@ -47,15 +47,11 @@ get_lsas <- function(dataset, subscales=F, completers=T){
   
   df_sum <- aggregate(response ~ pin, data=dataset, sum, na.action = NULL)
   df_sum$lsas_cat <- ifelse(df_sum$response >= thr_lsas, 1, 0)
-  df_sum$lsas_sev = ifelse(df_sum$response > 95, 4, 
-                            ifelse(df_sum$response >= 81 & df_sum$response <= 95, 3, 
-                                    ifelse(df_sum$response >= 66 & df_sum$response <= 80, 2, 
-                                            ifelse(df_sum$response >= 51 & df_sum$response <= 65, 1, 0))))
   
   
   
   if(subscales == F){
-    colnames(df_sum) <- c("PIN", "lsas_sum", "lsas_cat", "lsas_sev")
+    colnames(df_sum) <- c("PIN", "lsas_sum", "lsas_cat")
     return(df_sum)
   } else {
     subsc <- data.frame(matrix(ncol = length(names(contingency_lsas))+1, nrow = length(num_participants)))
@@ -67,7 +63,7 @@ get_lsas <- function(dataset, subscales=F, completers=T){
       subsc[,i] <- unname(sapply(subsc$pin, function(x) agreg_t[agreg_t$pin == x, "response"]))
     }
     answer <- merge(df_sum, subsc, by="pin")
-    colnames(answer) <- c("PIN", "lsas_sum", "lsas_cat", "lsas_sev", "lsas_sym_sif", "lsas_sym_sia", "lsas_sym_pf", "lsas_sym_pa")
+    colnames(answer) <- c("PIN", "lsas_sum", "lsas_cat", "lsas_sym_sif", "lsas_sym_sia", "lsas_sym_pf", "lsas_sym_pa")
     return(answer)
   }
   
