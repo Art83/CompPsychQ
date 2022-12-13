@@ -2,7 +2,7 @@
 #' @param dataset original dataset "SDS" from the bundle
 #' @param completers boolean parameter, if True filters out participants that are not labeled as completers
 #' @return dataframe with 3 columns:
-#'         PIN, sds_sum, sds_cat
+#'         PIN, sds_sum, sds_cat, sds_sev
 #' @export
 get_sds <- function(dataset, subscales=F, completers=T){
   if(nrow(dataset) == 0 | ncol(dataset) == 0){
@@ -45,6 +45,10 @@ get_sds <- function(dataset, subscales=F, completers=T){
   df_sum <- aggregate(sds_cat ~ pin, data = dataset, sum)
   df_sum$sds_cat <- ifelse(df_sum$sds >= 1, 1, 0)
   df_sum <- merge(ds, df_sum, by="pin")
-  colnames(df_sum) <- c("PIN", "sds_sum", "sds_cat")
+  df_sum$sds_sev = ifelse(df_sum$response == 0, 0, 
+                          ifelse( (df_sum$response >= 1 & df_sum$response <= 3), 1,
+                                  ifelse( (df_sum$response >= 4 & df_sum$response <= 6), 2,
+                                          ifelse((df_sum$response >= 7 & df_sum$response <= 9), 3, 4) ) ) )
+  colnames(df_sum) <- c("PIN", "sds_sum", "sds_cat", "sds_sev")
   return(df_sum)
 }
