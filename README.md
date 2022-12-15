@@ -1,7 +1,23 @@
-<h1>Surveys</h1>
-<h3 style="color: `#00bfff`">OCI-R</h3>
+<style>
+h3 {
+  color: #00bfff;
+}
 
-* Binary threshold: <span style="color:#FF0000">>=21</span> - clinical OCD
+.binary {
+  color: #ff0000;
+}
+.severity {
+  color: #00FF00;
+}
+
+</style>
+
+
+
+<h1>Surveys</h1>
+<h3>OCI-R</h3>
+
+* Binary threshold: <span class="binary">>=21</span> - clinical OCD
 * Number of questions: 18
 * Range of scores: 0-72
 * Subscale Categories:
@@ -17,6 +33,6 @@
   * "Moderately" = 2
   * "A lot" = 3
   * "Extremely" = 4
-  * Severity categories: <span style="color:#00FF00">NA</span>
+  * Severity categories: <span class="severity">NA</span>
 
 <h3 style="color:`#00bfff`">EAT-26</h3>
