@@ -1,19 +1,3 @@
-<style>
-h3 {
-  color: #00bfff;
-}
-
-.binary {
-  color: #ff0000;
-}
-.severity {
-  color: #00FF00;
-}
-
-</style>
-
-
-
 <h1>Surveys</h1>
 <h3>OCI-R</h3>
 
@@ -35,4 +19,5 @@ h3 {
   * "Extremely" = 4
   * Severity categories: <span class="severity">NA</span>
 
-<h3 style="color:`#00bfff`">EAT-26</h3>
+<h3>EAT-26</h3>
+

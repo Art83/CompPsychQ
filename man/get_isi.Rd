@@ -12,8 +12,8 @@ get_isi(dataset, completers = T)
 \item{completers}{boolean parameter, if True filters out participants that are not labeled as completers}
 }
 \value{
-dataframe with 4 columns:
-        PIN, isi_sum, isi_cat, isi_sev
+dataframe with 3 columns:
+        PIN, isi_sum, isi_cat
 }
 \description{
 get_isi function

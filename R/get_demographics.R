@@ -2,6 +2,7 @@
 #' @param dataset original dataset "demographics" from the bundle
 #' @param completers boolean parameter, if True filters out participants that are not labeled as completers
 #' @param convert boolean parameter, if True converts all categorical values into integers
+#' @param checks boolean parameter, if True checks for improbable values in age, weight and height columns
 #' @return dataframe with eleven columns:
 #'         PIN, gender, age,height,weight,BMI, marital status, education,employment, income, location 
 #' @export
@@ -64,6 +65,7 @@ get_demographics <- function(dataset, completers=T, convert=F, checks=T){
   height$feet <- as.numeric(height$feet)
   height$inch <- as.numeric(height$inch)
   height$cm <- as.numeric(height$cm)
+  height$inch[which(!is.na(height$feet) & is.na(height$inch))] <- 0
   height$cm[which(is.na(height$cm))] <- (as.numeric(height$feet[which(is.na(height$cm))])*12 + as.numeric(height$inch[which(is.na(height$cm))]))*2.54
   height <- height[,c("pin","cm")]
   colnames(height)[grepl("cm", colnames(height))] <- "height"

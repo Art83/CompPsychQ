@@ -12,6 +12,8 @@ get_demographics(dataset, completers = T, convert = F, checks = T)
 \item{completers}{boolean parameter, if True filters out participants that are not labeled as completers}
 
 \item{convert}{boolean parameter, if True converts all categorical values into integers}
+
+\item{checks}{boolean parameter, if True checks for improbable values in age, weight and height columns}
 }
 \value{
 dataframe with eleven columns:
